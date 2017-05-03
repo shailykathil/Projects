@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Boots</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/projects">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/projects/new">New Project</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href= "#" >Show member</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+            <li><a href="/users/sign_in">Login</a></li>
+            <li><a href="/users/sign_up">Register</a></li>
+            <% end%>
+            <li class="active"><a href="/categories">Category <span class="sr-only">(current)</span></a></li>
+            <li><a href="/categories/new">New Category</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div id="user_nav">
+    
+    <%=form_tag "/projects" ,:method=>"GET" do %> 
+    <%= text_field_tag :search, params[:search] , :placeholder => "Type here to search"%>
+    <%= select_tag "category", options_from_collection_for_select(Category.all, 'id', 'name', '1') ,:prompt => 'Select Category' %>  
+    <%= submit_tag "Search", :class=>"btn btn-primary"%> 
+     <%end%>  
+        </div> 
+<br>
+    <%= yield %>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
+  </body>
+</html>

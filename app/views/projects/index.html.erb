@@ -1,0 +1,51 @@
+<% if params[:search].present? || params[:category].present? %>
+   <%= @projects.count %> Results found.
+   <% else %>
+   no result found
+  <% end %>
+
+<h1>Listing Projects</h1>
+<br>
+<%= link_to 'New Project', new_project_path %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Category</th>
+     <th>Document</th>
+     <th>Status</th>
+     <th>Member</th>
+    <th colspan="6"></th>
+  </tr>
+ 
+  <% @projects.each do |project| %>
+  <%if project.active == true %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><%= project.description%></td>
+      <td>  
+      <%if project.category_id.present? %> 
+      <%= Category.find(project.category_id).name %>
+      <% end %>
+      </td>  
+      <td>
+        <% if project.document.present? %>
+        <%= project.document.file.original_filename %>
+        <% end %>
+      </td>
+      <td>  
+       <%= project.status%>
+      </td>
+      <td>
+       <%= project.members.collect(&:user).compact.flatten.collect(&:email) %>
+      </td>
+      <td><%= link_to 'Show', project_path(project) %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% else%>
+  <% end %>
+  <% end %>
+</table>
