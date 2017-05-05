@@ -12,7 +12,7 @@
     <%= f.file_field :image %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit   :class=>"btn btn-success" %>
   </p>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <% end %>

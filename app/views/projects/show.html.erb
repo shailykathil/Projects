@@ -18,7 +18,7 @@
  <% end %>
 </p>
 <p>
-<%=link_to 'Add Member', new_project_member_path(@project) %>
+<%=link_to 'Add Member', new_project_member_path(@project) , :class=>"btn btn-default" %>
     
 </p>
 
@@ -30,5 +30,5 @@
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_project_path(@project) , :class=>"btn btn-default" %> |
+<%= link_to 'Back', projects_path , :class=>"btn btn-default" %>

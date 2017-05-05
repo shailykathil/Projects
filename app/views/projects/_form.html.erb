@@ -1,4 +1,4 @@
-<%= form_for @project do |f| %>
+<%= form_for @project, :class=>"form-horizontal" do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -10,39 +10,74 @@
       </ul>
     </div>
   <% end %>
-<p><%= f.label :name %> 
-<%= f.text_field :name %>
-</p>
-
-<p><%= f.label :description %> 
-<%= f.text_field :description %>
-</p>
-
-<p><%= f.label :document %> 
-<%= f.file_field :document %>
-</p> 
-
-<p>
-<%= f.label :category %>   
-<br>
-<%= f.select(:category_id, Category.all.collect {|u| [u.name, u.id]}, :prompt => 'Select Category') %> 
-</p>
-<p>
-<%= f.label :status %>   
-<br>
-<%= f.select "status",  options_for_select([ "Available", "Pending", "Completed" ]), :prompt => 'Select Status'%>
-</p>
-<p>
-<div class="field">
-    <%= f.label :active%><br />
-    <%= f.label :active, "Yes", :value => "true"  %>
+  <div class="form-group">
+  <%= f.label :name, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  <%= f.text_field :name,  :class=>"form-control",:placeholder=>"Project Name"%>
+</div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+  <%= f.label :description, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  <%= f.text_field :description,  :class=>"form-control",:placeholder=>"Project Description"%>
+</div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+  <%= f.label :document, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+  <%= f.file_field :document,  :class=>"form-control" %>
+</div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+  <%= f.label :category, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-option-vertical"></i></span>
+ <%= f.select(:category_id, Category.all.collect {|u| [u.name, u.id]}, :class=>"form-control",:prompt => 'Select Category') %>
+</div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+  <%= f.label :status, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-option-vertical"></i></span>
+ <%= f.select "status",  options_for_select([ "Available", "Pending", "Completed" ]), :prompt => 'Select Status',  :class=>"form-control" %>
+ </div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+  <%= f.label :active, :class=>"col-md-4 control-label" %> 
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <%= f.label :active, "Yes", :value => "true" %>
     <%= f.radio_button :active, true , :checked => true%>
-    <%= f.label :active, "No", :value => "false" %>
+    <%= f.label :active, "No", :value => "false"  %>
     <%= f.radio_button :active, false, :checked => true %>
-  </div>
-</p>
-<br>
-<div class="actions">
-    <%= f.submit %>
+ </div>
+</div>
+</div>
+<br><br>
+<div class="form-group">
+ <label class="col-md-4 control-label"></label>
+  <div class="col-md-6 inputGroupContainer">
+  <div class="input-group">
+  <%= f.submit  :class=>"btn btn-success"%>
+ </div>
+</div>
 </div>
 <% end %>

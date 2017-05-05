@@ -1,13 +1,13 @@
 <% if params[:search].present? || params[:category].present? %>
    <%= @projects.count %> Results found.
    <% else %>
-   no result found
+   
   <% end %>
 
 <h1>Listing Projects</h1>
 <br>
-<%= link_to 'New Project', new_project_path %>
-<table>
+
+<table class="table table-bordered">
   <tr>
     <th>Name</th>
     <th>Description</th>
@@ -19,7 +19,7 @@
   </tr>
  
   <% @projects.each do |project| %>
-  <%if project.active == true %>
+  
     <tr>
       <td><%= project.name %></td>
       <td><%= project.description%></td>
@@ -39,13 +39,11 @@
       <td>
        <%= project.members.collect(&:user).compact.flatten.collect(&:email) %>
       </td>
-      <td><%= link_to 'Show', project_path(project) %></td>
-      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Show', project_path(project), :class=>"btn btn-info" %></td>
+      <td><%= link_to 'Edit', edit_project_path(project), :class=>"btn btn-warning"%></td>
       <td><%= link_to 'Destroy', project_path(project),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+              data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
     </tr>
-    <% else%>
-  <% end %>
   <% end %>
 </table>

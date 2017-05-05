@@ -8,13 +8,13 @@ class ProjectsController < ApplicationController
     # @projects = Project.where(:id => member.project_id)
     # end
        if params[:search].present?
-        @projects = Project.where('name LIKE ? OR description LIKE ? ', "%#{params[:search]}%","%#{params[:search]}%")
+        @projects = Project.where('name LIKE ? OR description LIKE ? AND active = ? ', "%#{params[:search]}%","%#{params[:search]}%", true)
       
       elsif params[:category].present?
        	category=Category.find(params[:category])
-       	@projects = category.projects.where('name LIKE ? OR description LIKE ? ', "%#{params[:category]}%","%#{params[:search]}%")
+       	@projects = category.projects.where('name LIKE ? OR description LIKE ? AND active = ? ', "%#{params[:category]}%","%#{params[:search]}%",true)
       else 
-        @projects = Project.all 
+        @projects = Project.where(:active=>true)
      end
   end
 
